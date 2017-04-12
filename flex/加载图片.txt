@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" applicationComplete="InitApp()">
+    <mx:Script>
+        <![CDATA[
+       
+            //第一种方式 这种方式编译以后1.jpg 会直接编译进swf文件中 所以swf可以独立存在
+            [Bindable]
+            [Embed(source="1.jpg")]
+            private var imgClass:Class;
+           
+            //第2种方式
+            private var _loader:Loader;
+           
+            private function InitApp():void{
+               
+                //第一种方式的代码
+                _img.source = imgClass;
+               
+                //第二种方式的代码
+                _loader = new Loader();
+                //这里需要注意的是 不是_loader.addEventListener  这样是没有效果的
+                _loader.contentLoaderInfo.addEventListener(Event.COMPLETE,function(e:Event):void{
+                    _img.source = e.currentTarget.content;
+                });
+                //这里说一个技巧  当url 中有中文字体的话 使用encodeURI方法 如果没有 则可以不加
+                _loader.load(new URLRequest(encodeURI("1.jpg")));
+               
+               
+                //第三种方式比较简单
+                _img.source = "1.jpg";  //注意这里必须设置img autoLoad属性为true 和 图片放置路径
+               
+                //最后说明 其中第2 第3种方式中swf都不能独立存在 必须配合1.jpg文件的存在 而第一种方式则不需要
+            }
+        ]]>
+    </mx:Script>
+    <mx:Image x="51" y="62" width="298" height="245" autoLoad="true" id="_img"/>
+</mx:Application>

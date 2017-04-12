@@ -1,0 +1,33 @@
+1.load-path是一个很重要变量，全局变量。
+2.请记住一个非常有用的命令，list-load-path-shadows，它可以总结所有插件当前的'shadow'状态。
+键入M-x list-load-path-shadows RET。
+3.默认的插件安装路径是~/.emacs.d/elpa。
+4.C-/ 为撤销
+
+;; 设置标题栏,我的设置为Welcome to Emacs world!
+(setq frame-title-format "Welcome to Emacs world! ")
+ 
+;; 禁用菜单栏，F10 开启关闭菜单
+(menu-bar-mode nil)
+ 
+;; 取消工具栏
+(tool-bar-mode nil)
+ 
+;; 取消滚动栏
+(set-scroll-bar-mode nil)
+ 
+;; 显示行列号,它显示在minibuffer上面那个杠上
+(setq column-number-mode t)
+(setq line-number-mode t)
+ 
+;;关闭emacs启动时的画面
+(setq inhibit-startup-message t)
+ 
+;;关闭gnus启动时的画面
+(setq gnus-inhibit-startup-message t)
+ 
+;; 设置启动时窗口的长宽，下面为80*40
+(setq initial-frame-alist '((width . 80) (height . 40)))
+ 
+;;关闭出错时的提示声
+(setq visible-bell t) 

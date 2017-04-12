@@ -1,0 +1,154 @@
+1. 为什么要创建自定义组件
+
+创建自定义组件通常有以下目的：
+
+更改已有组件的可视化外观或可视化特性。
+
+创建复合组件将两个或多个组件包装在新组件中。
+
+通过继承UIComponent类来创建全新的组件。
+
+通常用继承已有类的方式来创建组件。比如，要创建基于Button的控件，我们就创建mx.controls.Button类的一个子类。如果要创建全新的组件，则需要创建mx.core.UIComponent类的子类。
+
+2. 重载UIComponent类的protected方法
+
+Flex所有的可视化组件都是UIComponent类的子类。因此，可视化组件继承了UIComponent类所定义的方法（methods）、属性（properties）、事件（events）、样式（styles）和效果（effects）。
+
+要创建自定义的可视化组件，必须实现一个构造器（constructor），另外要有选择性地重载UIComponent类中的一个或多个protected方法。表2-2列出了自定义组件需要重载的protected方法。
+
+从前面的内容我们可以知道，组件的使用者不会直接调用所有这些方法，Flex框架会自动调用这些方法。
+
+    自定义组件需要重载的protected方法
+
+    commitProperties()
+
+           提交组件的所有的属性变化，要么使属性同时更改，要么确保属性按照特定的顺序设置。
+
+    createChildren()
+
+          创建组件的子组件。比如ComboBox控件包含了一个TextInput控件和一个Button控件作为它的子组件。
+
+    layoutChrome()
+
+          定义Container类的子类容器的边框区域。
+
+    measure ()
+
+         设置组件的默认尺寸和默认的最小尺寸。
+
+    updateDisplayList()
+
+         根据以前所设置的属性和式样来确定组件的子组件在屏幕上的尺寸及位置，并且画出组件使用的所有皮肤及图形化元素。组件的父容器负责确定组件尺寸。
+
+3. 创建组件的步骤
+
+为了实现一个组件，就要重载组件的方法，定义新的属性，分发新的事件，或者执行其他任何应用所需的自定义的逻辑。要想实现自己的组件，应遵循以下这些常规步骤：
+
+（1）如果有必要，为组件创建所需的皮肤。
+
+（2）创建 ActionScript类文件。
+
+    1）从一个基类扩展，比如UIComponent或者其他的组件类。
+
+    2）指定使用者能够通过MXML标记进行设置的属性。
+
+    3）嵌入所有的图片和皮肤文件。
+
+    4）实现构造器。
+
+    5）实现UIComponent.createChildren()方法。
+
+    6）实现UIComponent.commitProperties()方法。
+
+    7）实现UIComponent.measure()方法。
+
+    8）实现UIComponent.layoutChrome()方法。
+
+    9）实现UIComponent.updateDisplayList()方法。
+
+    10）增加属性、方法、样式、事件以及元数据。
+
+（3）以ActionScript文件或SWC文件的形式部署组件。
+
+定义新组件时不一定要重载所有方法，只需要重载实现组件功能所需的方法即可。如果创建现存组件的子类，比如Button控件或VBox容器，那么必须实现组件中增加的新功能所需的方法。
+
+例如，实现一个自定义的Button控件，该控件使用新的机制来定义默认大小。在这种情况下，只需要重载measure()方法即可。
+
+或者，要实现VBox容器的一个新子类，新子类利用VBox类已有的所有与设定尺寸（sizing）有关的逻辑，但是变更了VBox类的布局逻辑以实现“自底向上”的方式来布局容器中的子组件，而不是“自顶向下”的布局逻辑。在这种情况下，只需要重载updateDisplayList()方法。
+
+
+4. 自定义组件的实现
+
+            1）.基本组件结构
+
+            2）. 实现构造器
+
+                     用AS写的UIComponent类或子类的子类，应该应以public构造器的方法。AS中构造器有以下特点。
+
+                     【没有返回类型】
+
+                     【应被声明为public】
+
+                     【没有参数】
+
+                     【调用super()方法以使用父类的构造器】
+
+            每一个类只能有一个构造器方法，AS不支持构造方法重载。【不要在构造器中创建组件的内部对象，因为在没有把组件放入显示列表之前创建组件的内部对象没有任何意义，只能增加系统的开销。因此，构造器只用于设置组件属性的初始值。如果组件要创建组件内部的对象，可以在createChildren（）方法中创建】。
+
+            3）.实现createChildren（）方法
+
+                    应用开发者（非组件开发者）不要直接调用createChildren()方法。了解组件的生命周期我们知道：当开发者调用addChild()方法将组件添加到父容器中时，Flex会自动调用组件的createChildren()方法。
+
+【注意】createChildren()没有与之相关的失效方法，这意味着组件被添加到父组件中时，不会等到下一个渲染事件时才调用这个方法。
+
+            4）.实现commitProperties()方法
+
+使用commitProperties()方法来协调对组件属性的更改。绝大多数情况下，都对那些影响组件在屏幕上显示的属性使用该方法。当invalidateProperties()方法被调用后，commitProperties()方法会在invalidateProperties()方法调用之后的下一个“渲染事件(render event)”中执行。【当使用addChild()方法向容器中添加一个组件时，Flex会自动调用invalidateProperties()方法】commitProperties()方法的调用发生在measure()方法调用之前，这使我们能够设置measure()方法可能会使用到的属性。
+
+             【优点】：
+
+                          【能够 协调对多个属性的修改，使得这些变更能够同时生效】【能够协调对同一个属性的多次修改】
+
+            5）.实现measure()方法
+
+当invalidateSize()方法被调用后，measure()方法会在invalidateSize()方法调用之后的下一个“渲染事件(render event)”中执行。【当使用addChild()方法向容器中添加一个组件时，Flex会自动调用invalidateSize()方法】
+
+measure需要处理的属性：
+
+measureHeight、 默认高度
+
+measureWidth、 默认宽度
+
+这些属性被设置为0，知道measure()方法被执行，如果它们被设置为0，那么使得组件在默认情况下不可见。
+
+measureMinHeight、默认最小高度
+
+measureMinWidth、默认最小宽度
+
+            6）.计算默认大小
+
+            7）.实现layoutChrome()方法
+
+Container类和container的子类，使用layoutChrome()方法来定义容器的边框区域。当invalidateDisplayList()方法被调用后，layoutChrome()方法会在invalidateDisplayList()方法调用之后的下一个“渲染事件(render event)”中执行。【当使用addChild()方法向容器中添加一个组件时，Flex会自动调用invalidateDisplayList()方法】
+
+不要在layoutChrome方法中调用组件的addChild()方法，会出现死循环。
+
+            8）.实现updateDisplayList()方法
+
+updateDisplayList()方法按照布局的提交和度量阶段所设定的属性和式样来设定子组件的大小和位置，并画出组件所使用的皮肤和图片元素，而且组件本身大小则由组件的父容器来决定。知道组件的updateDisplayList()方法被调用之后，组件才能在屏幕上显示出来。
+
+            9）.在组件中画图
+
+每个Flex组件都是FlashSprite类的子类，因此集成了Sprite.graphics属性。Sprite.graphics属性所指的对象Graphics对象可以用来向组件中添加适量绘画（vector drawings）
+
+example:
+
+override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void{
+
+                super.updateDisplayList(unscaledWidth,unscaledHeight);
+
+                graphics.lineStyle(1, 0x000000, 1.0);
+
+                graphics.drawRect(0, 0, unscaledWidth, unscaledHeight);
+
+}

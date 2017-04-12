@@ -1,0 +1,73 @@
+* 列表
+1) [-] 任务1 [50%]
+   1) [ ] 子任务1
+   2) [X] 子任务2
+2) [ ] 任务2
+3) [-] ldkfja [40%]
+   1) [X] zirenwu1
+   2) [X] ADAAA 
+
+* 脚注
+[fn:1]本文参考自：http://orgmode.org/orgguide.pdf
+
+* 表格显示
+| name |   sex | age | address | total |
+|------+-------+-----+---------+-------|
+| no   |   123 |  23 |      32 |    55 |
+|      | 43243 |     |    2321 | 1 2321 |
+|      |       |     |         |     0 |
+#+TBLFM: $5=$3+$4
+
+* 图片链接
+[[C:\Users\yuanzishuai-pc\Pictures]]
+
+* 代办事项[TODO]
+** DONE [# A] 任务1						     :renwu1:
+** TODO [# B] 任务2						     :renwu2:
+** DONE 总任务 [0%] 						  :zongrenwu:
+*** TODO 子任务1						    :zirenwu:
+*** TODO 子任务2 [0%]
+     - [-] subsub1 [1/2]
+       - [ ] subsub2
+       - [X] subsub3
+*** 一个已完成的任务
+* 添加时间
+快捷键:C-c .
+deadline:<2017-03-24 周五>
+* 各种文本格式
+*hehe*
+/dsfds/
+_dsfsd_
+=code=
+~dsf~
++dfdfsdf+
+
+* 富文本导出
+** 设置标题和目录
+# +TITLE: This is the title of the document
+# +OPTIONS: toc:2 (only to two levels in TOC)
+# +OPTIONS: toc:nil (no TOC at all)
+** 添加引用
+#+BEGIN_QUOTE
+Everything should be made as simple as possible,
+but not any simpler -- Albert Einstein
+#+END_QUOTE
+* 执行源代码
+#+BEGIN_SRC python :results output
+a = 1+1
+print a
+#+END_SRC
+
+#+RESULTS:
+
+#+begin_src C++ :
+  includes <stdio.h>
+    int a=1;
+    int c=0;
+    int b=1;
+    printf("%d\n", a+b);
+#+end_src
+
+#+BEGIN_SRC emacs-lisp
+(+ 1 2 3 4)
+#+END_SRC

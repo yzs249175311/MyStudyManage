@@ -1,0 +1,9 @@
+* 目录
+** 方法分析
+*** AppControlManager.ApiEvtRegister()
+Appcontrolmanager.ApiEvtRegister(instance:Object,evtName:String,evtFun:Function,nameSpace:String="")
+
+- instance  要添加监听事件的实例对象
+- evtName   要添加监听事件名称
+- evtFun    当监听事件触发回调函数
+- nameSpace 设置命名空间，防止事件覆盖

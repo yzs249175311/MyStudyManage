@@ -1,0 +1,29 @@
+* 目录
+** python环境搭建
+*** flycheck flycheck-pyflakes
+flycheck为语法检查插件，依赖flycheck-pyflakes。
+
+在init.el中的设置为：
+(required 'flycheck)
+(add-hook 'after-init-hook 'flycheck-mode)
+
+*** virtualenvwrapper jedi
+jedi为自动补全插件,需要安装virtualenvwrapper。
+
+在init.el中的设置为：
+(setq elpy-rpc-backend "jedi")
+
+*** elpy(Emacs Lisp Python Environment)
+elpy插件提供了几乎所有的功能:
+自动缩进
+语法高亮
+自动补全
+语法检查
+REPL集成
+虚拟环境支持，以及更多其他功能
+
+在init.el中的设置为：
+(elpy-p)
+
+** 基本数据类型
+tips：对象有类型，变量无类型。

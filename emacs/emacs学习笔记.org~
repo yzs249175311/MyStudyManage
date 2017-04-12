@@ -1,0 +1,14 @@
+* 目录
+** day1(基本操作 详情看C-h t)
+** day2
+*** 1) 匹配emacs-lisp-mode模式下的括号
+#+BEGIN_SRC emacs-lisp
+(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+#+END_SRC
+
+*** 2) 显示当前行
+#+BEGIN_SRC emacs-lisp
+(global-hl-line-mode t)
+#+END_SRC
+
+

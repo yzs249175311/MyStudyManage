@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>python</title>
+<!-- 2017-03-29 周三 17:26 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">python</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 目录</a>
+<ul>
+<li><a href="#sec-1-1">1.1. python环境搭建</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1. flycheck flycheck-pyflakes</a></li>
+<li><a href="#sec-1-1-2">1.1.2. virtualenvwrapper jedi</a></li>
+<li><a href="#sec-1-1-3">1.1.3. elpy(Emacs Lisp Python Environment)</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2. 基本数据类型和基本语法</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1. 数据类型</a></li>
+<li><a href="#sec-1-2-2">1.2.2. tips：对象有类型，变量无类型。</a></li>
+<li><a href="#sec-1-2-3">1.2.3. 四舍五入的函数:</a></li>
+<li><a href="#sec-1-2-4">1.2.4. 字符集的声明：</a></li>
+<li><a href="#sec-1-2-5">1.2.5. 等待用户输入和输出</a></li>
+<li><a href="#sec-1-2-6">1.2.6. if&#x2026;elif&#x2026;else语句</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 目录</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> python环境搭建</h3>
+<div class="outline-text-3" id="text-1-1">
+</div><div id="outline-container-sec-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> flycheck flycheck-pyflakes</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+flycheck为语法检查插件，依赖flycheck-pyflakes。
+</p>
+
+<p>
+在init.el中的设置为：
+(required 'flycheck)
+(add-hook 'after-init-hook 'flycheck-mode)
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> virtualenvwrapper jedi</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+jedi为自动补全插件,需要安装virtualenvwrapper。
+</p>
+
+<p>
+在init.el中的设置为：
+(setq elpy-rpc-backend "jedi")
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> elpy(Emacs Lisp Python Environment)</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<p>
+elpy插件提供了几乎所有的功能:
+自动缩进
+语法高亮
+自动补全
+语法检查
+REPL集成
+虚拟环境支持，以及更多其他功能
+</p>
+
+<p>
+在init.el中的设置为：
+(elpy-p)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> 基本数据类型和基本语法</h3>
+<div class="outline-text-3" id="text-1-2">
+</div><div id="outline-container-sec-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> 数据类型</h4>
+<div class="outline-text-4" id="text-1-2-1">
+</div><ol class="org-ol"><li><a id="sec-1-2-1-1" name="sec-1-2-1-1"></a>1) Number(数字)<br  /><div class="outline-text-5" id="text-1-2-1-1">
+<p>
+python3支持int,float,bool,complex(复数)
+在python3中只有一种整数类型int,没有python2中的long
+内置函数type()可以查看对象的类型
+</p>
+</div>
+</li>
+<li><a id="sec-1-2-1-2" name="sec-1-2-1-2"></a>2) String(数组)<br  /><div class="outline-text-5" id="text-1-2-1-2">
+<div class="org-src-container">
+
+<pre class="src src-python">text1=r"hello \n world" #在字符喘前加r或R表示自然字符串,\n不会换行,会被输出。
+print(text1)
+text2=u"hello world"  #python允许处理unicode字符串,加前缀u或U
+print(text2)
+word="这是一个字符串" 
+print(word)
+sentence="这是一个句子"
+print(sentence)
+paragragh="""这是一个段落
+可以由多行组成"""
+print(paragragh)
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-python">str = 'Runoob'
+
+print (str)          # 输出字符串
+print (str[0:-1])    # 输出第一个到倒数第二个的所有字符
+print (str[0])       # 输出字符串第一个字符
+print (str[2:5])     # 输出从第三个开始到第五个的字符
+print (str[2:])      # 输出从第三个开始的后的所有字符
+print (str * 2)      # 输出字符串两次
+print (str + "TEST") # 连接字符串
+print (str[2:] * 2)  # 输出从第三个开始后的所有字符两次
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-python">a=1994
+b="yuanzishuai"
+#如果直接写print(a+b)或print(b+a)会报错
+print(b+str(a))
+print(b+repr(a))#repr()函数是反引号的替代品
+</pre>
+</div>
+</div>
+</li>
+<li><a id="sec-1-2-1-3" name="sec-1-2-1-3"></a>3) List(列表)<br  /><div class="outline-text-5" id="text-1-2-1-3">
+<p>
+列表写在[]里,元素用,分开。列表中的元素可以不相同。
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">list = [ 'abcd', 786 , 2.23, 'runoob', 70.2 ]
+tinylist = [123, 'runoob']
+
+print (list)            # 输出完整列表
+print (list[0])         # 输出列表第一个元素
+print (list[1:3])       # 从第二个开始输出到第三个元素
+print (list[2:])        # 输出从第三个元素开始的所有元素
+print (tinylist * 2)    # 输出两次列表
+print (list + tinylist) # 连接列表
+</pre>
+</div>
+
+<p>
+注意：
+</p>
+<ol class="org-ol">
+<li>List写在方括号之间，元素用逗号隔开。
+</li>
+<li>和字符串一样，list可以被索引和切片。
+</li>
+<li>List可以使用+操作符进行拼接。
+</li>
+<li>List中的元素是可以改变的。
+</li>
+</ol>
+</div>
+</li>
+
+<li><a id="sec-1-2-1-4" name="sec-1-2-1-4"></a>4) Tuple(元组)<br  /><div class="outline-text-5" id="text-1-2-1-4">
+<p>
+元组和列表类似,元组写在()里,元素之间用,分开。元组中的元素也可以不相同。但是元组中的数据不能被修改。
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python">tuple = ( 'abcd', 786 , 2.23, 'runoob', 70.2  )
+tinytuple = (123, 'runoob')
+
+print (tuple)             # 输出完整元组
+print (tuple[0])          # 输出元组的第一个元素
+print (tuple[1:3])        # 输出从第二个元素开始到第三个元素
+print (tuple[2:])         # 输出从第三个元素开始的所有元素
+print (tinytuple * 2)     # 输出两次元组
+print (tuple + tinytuple) # 连接元组
+
+tup1 = ();                # 表示空的元组
+tup2 = (20,);              # 表示一个元素的元组,逗号不能省略
+</pre>
+</div>
+
+<p>
+string、list和tuple都属于sequence（序列）。
+注意：
+</p>
+<ol class="org-ol">
+<li>与字符串一样，元组的元素不能修改。
+</li>
+<li>元组也可以被索引和切片，方法一样。
+</li>
+<li>注意构造包含0或1个元素的元组的特殊语法规则。
+</li>
+<li>元组也可以使用+操作符进行拼接。
+</li>
+</ol>
+</div>
+</li>
+<li><a id="sec-1-2-1-5" name="sec-1-2-1-5"></a>5) Sets(集合)<br  /><div class="outline-text-5" id="text-1-2-1-5">
+<p>
+集合（set）是一个无序不重复元素的序列。
+基本功能是进行成员关系测试和删除重复元素。
+可以使用大括号({})或者 set()函数创建集合，注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python">student = ({'Tom', 'Jim', 'Mary', 'Tom', 'Jack', 'Rose'})
+
+print(student)   # 输出集合，重复的元素被自动去掉
+
+# 成员测试
+if('Rose' in student) :
+    print('Rose 在集合中')
+else :
+    print('Rose 不在集合中')
+
+# set可以进行集合运算
+a = set('abracadabra')
+b = set('alacazam')
+
+print(a)
+print(a - b)     # a和b的差集
+print(a | b)     # a和b的并集
+print(a &amp; b)     # a和b的交集
+print(a ^ b)     # a和b中不同时存在的元素
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="sec-1-2-1-6" name="sec-1-2-1-6"></a>6) Dictionary(字典)<br  /><div class="outline-text-5" id="text-1-2-1-6">
+<p>
+字典（dictionary）是Python中另一个非常有用的内置数据类型。
+列表是有序的对象结合，字典是无序的对象集合。两者之间的区别在于：字典当中的元素是通过键来存取的，而不是通过偏移存取。
+字典是一种映射类型，字典用"{ }"标识，它是一个无序的键(key) : 值(value)对集合。
+键(key)必须使用不可变类型。
+在同一个字典中，键(key)必须是唯一的。 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python"># -*- coding:utf-8 -*-
+dict = {}
+dict['one'] = "1 - 菜鸟教程"
+dict[2]     = "2 - 菜鸟工具"
+
+tinydict = {'name': 'runoob','code':1, 'site': 'www.runoob.com'}
+
+print (dict['one'])       # 输出键为 'one' 的值
+print (dict[2])           # 输出键为 2 的值
+print (tinydict["name"])  # 输出键为 "name" 的值
+print (tinydict)          # 输出完整的字典
+print (tinydict.keys())   # 输出所有键
+print (tinydict.values()) # 输出所有值
+</pre>
+</div>
+
+<p>
+构造函数 dict() 可以直接从键值对序列中构建字典如下：
+</p>
+<div class="org-src-container">
+
+<pre class="src src-python">dict1=dict([('Runoob', 1), ('Google', 2), ('Taobao', 3)])
+print(dict1)
+
+dict2={x:x**2 for x in [2,3,4]}
+print(dict2)
+
+dict3=dict(Runoob=1,Google=2,Taobao=3)
+print(dict3)
+</pre>
+</div>
+
+<p>
+注意：
+</p>
+<ol class="org-ol">
+<li>字典是一种映射类型，它的元素是键值对。
+</li>
+<li>字典的关键字必须为不可变类型，且不能重复。
+</li>
+<li>创建空字典使用 { }。
+</li>
+</ol>
+</div>
+</li>
+
+<li><a id="sec-1-2-1-7" name="sec-1-2-1-7"></a>python数据类型转换<br  /><div class="outline-text-5" id="text-1-2-1-7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">函数</th>
+<th scope="col" class="left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">int(x[,base])</td>
+<td class="left">将x转换为一个整数</td>
+</tr>
+
+<tr>
+<td class="left">float(x)</td>
+<td class="left">将x转换到一个浮点数</td>
+</tr>
+
+<tr>
+<td class="left">complex(real [,imag])</td>
+<td class="left">创建一个复数</td>
+</tr>
+
+<tr>
+<td class="left">str(x)</td>
+<td class="left">将对象x转换为字符</td>
+</tr>
+
+<tr>
+<td class="left">repr(x)</td>
+<td class="left">将对象x转换为表达式字符串</td>
+</tr>
+
+<tr>
+<td class="left">eval(str)</td>
+<td class="left">用来计算字符串中有效python表达式,并返回一个对象</td>
+</tr>
+
+<tr>
+<td class="left">tuple(s)</td>
+<td class="left">将序列s转换为一个元组</td>
+</tr>
+
+<tr>
+<td class="left">list(s)</td>
+<td class="left">将序列s转换为一个列表</td>
+</tr>
+
+<tr>
+<td class="left">set(s)</td>
+<td class="left">将序列s转换为一个可变集合</td>
+</tr>
+
+<tr>
+<td class="left">dict(d)</td>
+<td class="left">创建一个字典。d必须是一个序列(key,value)元组</td>
+</tr>
+
+<tr>
+<td class="left">frozenset(s)</td>
+<td class="left">转换为不可变集合</td>
+</tr>
+
+<tr>
+<td class="left">chr(x)</td>
+<td class="left">将一个整数转换为一个字符</td>
+</tr>
+
+<tr>
+<td class="left">unichr(x)</td>
+<td class="left">将一个整数转换为unicode字符</td>
+</tr>
+
+<tr>
+<td class="left">ord(x)</td>
+<td class="left">将一个字符转换为它的整数值</td>
+</tr>
+
+<tr>
+<td class="left">hex(x)</td>
+<td class="left">将一个整数转换为一个十六进制字符串</td>
+</tr>
+
+<tr>
+<td class="left">oct(x)</td>
+<td class="left">将一个整数转换为一个八进制字符串</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li></ol>
+</div>
+
+
+<div id="outline-container-sec-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> tips：对象有类型，变量无类型。</h4>
+</div>
+<div id="outline-container-sec-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> 四舍五入的函数:</h4>
+<div class="outline-text-4" id="text-1-2-3">
+<div class="org-src-container">
+
+<pre class="src src-python">round(10/3,4) #保存小数点后四位
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> 字符集的声明：</h4>
+<div class="outline-text-4" id="text-1-2-4">
+<div class="org-src-container">
+
+<pre class="src src-python"># -*- coding:utf-8 -*-  
+print("声明之后就可以打中文了")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5"><span class="section-number-4">1.2.5</span> 等待用户输入和输出</h4>
+<div class="outline-text-4" id="text-1-2-5">
+<div class="org-src-container">
+
+<pre class="src src-python">yourname=input("\n\n input your name:") #在字符串前面加r是没有用的
+print(yourname)
+
+print(yourname,end=" ") #表示不换行输出
+print("is best")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2-6" class="outline-4">
+<h4 id="sec-1-2-6"><span class="section-number-4">1.2.6</span> if&#x2026;elif&#x2026;else语句</h4>
+<div class="outline-text-4" id="text-1-2-6">
+<div class="org-src-container">
+
+<pre class="src src-python">key=input("please input True or False:")
+
+if key:
+    print("True")
+elif key:
+    print("elif key")
+else:
+    print("False")
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2017-03-29 周三 17:26</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
