@@ -1,0 +1,53 @@
+* 文件
+** 前端
+** 后端
+*** 
+* 流程
+** 前端
+*** 添加一个主模块
+**** 第一步:在menu.xml和menu_module.xml文件中添加Node元素,并在ModuleConstants.as文件中添加相应变量
+
+- 右键项目——>属性——>flex模块——>把主模块****_MainModule.mxml文件添加进去
+[[file:image/添加模块.png]]
+
+**** 第二步:修改项目中raw文件夹中的ClientUI.fla
+
+- ClientUI.fla文件中button的类型为SimpleButton。
+
+- button的名字"_"(下划线)后面的书在要与menu.xml文件中Node元素的id相对应。
+
+- 注意:Clientui.fla文件修改完成后要导出成*.swf和*.swc文件,并同*.fla文件一同放回项目中。
+
+**** 第三步:创建主模块和子模块
+
+主模块(例):
+#+BEGIN_SRC:
+public function initSubModule():{
+    addModule(ModuleConstants.MyCustom_MODULE_022002, new MyCustom()); //将子模块与Node对应起来
+    addModule(ModuleConstants.MyCustom_MODULE_022001, new MyCustom_step1());
+    addModule(ModuleConstants.MyCustom_MODULE_022003, new MyCustom_step3());		
+}
+#+END_SRC
+
+*** 将前端的数据传入后端
+- 调用方法DoSerViceUtil.doService()
+- 最后一个参数reqUrl 应该为sysconfig.xml文件中name为CONTEXT_URL元素的中的元素的name
+- 报文需要在iprocess.xml文件中配置
+
+
+** 后端
+*** 接收前端传来的参数
+**** 写相应的Controller文件
+- @autowired:自动加载
+
+- @RequestMapping(value = ""):映射相应的报文,value对应的为前端DoServiceUtil.doService()第一个参数
+- @ResponseBody
+
+*** 调用数据库数据
+**** 1.完成xxxDao.java和xxxDao.xml文件,以及xxxInf.java文件
+**** 2.完成xxxService.java和xxxServiceImpl.java文件
+**** 3.在mybatis-config-hdcctptran.xml中配置xxxInf.java文件的别名
+**** 4.xxxController.java文件中自动加载xxxService,并调用相关方法。
+**** 注意:
+- xxxService.java文件中要自动加载xxxDao类(即添加注解@autowired)
+- xxxDao.xml文件中parameterType的值为xxxDao.java中对应方法的的参数类型,resultType的值为对应方法返回值list<>泛型中的类型,一般为 xxxInf。

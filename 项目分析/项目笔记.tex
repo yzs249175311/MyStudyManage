@@ -1,0 +1,115 @@
+% Created 2017-04-25 周二 17:36
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usetheme{default}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.1.1 (Org mode 9.0.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+\begin{frame}[label={sec:org54c2c03}]{文件}
+\begin{block}{前端}
+\end{block}
+\begin{block}{后端}
+\begin{block}{}
+\end{block}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:orgdde91aa}]{流程}
+\begin{block}{前端}
+\begin{block}{添加一个主模块}
+\begin{block}{第一步:在menu.xml和menu\(_{\text{module.xml文件中添加Node元素,并在ModuleConstants.as文件中添加相应变量}}\)}
+\begin{itemize}
+\item 右键项目——>属性——>flex模块——>把主模块****\(_{\text{MainModule.mxml文件添加进去}}\)
+\end{itemize}
+\begin{center}
+\includegraphics[width=.9\linewidth]{image/添加模块.png}
+\end{center}
+\end{block}
+
+\begin{block}{第二步:修改项目中raw文件夹中的ClientUI.fla}
+\begin{itemize}
+\item ClientUI.fla文件中button的类型为SimpleButton。
+
+\item button的名字"\_"(下划线)后面的书在要与menu.xml文件中Node元素的id相对应。
+
+\item 注意:Clientui.fla文件修改完成后要导出成*.swf和*.swc文件,并同*.fla文件一同放回项目中。
+\end{itemize}
+\end{block}
+
+\begin{block}{第三步:创建主模块和子模块}
+主模块(例):
+\#+BEGIN\(_{\text{SRC}}\):
+public function initSubModule():\{
+    addModule(ModuleConstants.MyCustom\(_{\text{MODULE}}\)\(_{\text{022002}}\), new MyCustom()); //将子模块与Node对应起来
+    addModule(ModuleConstants.MyCustom\(_{\text{MODULE}}\)\(_{\text{022001}}\), new MyCustom\(_{\text{step1}}\)());
+    addModule(ModuleConstants.MyCustom\(_{\text{MODULE}}\)\(_{\text{022003}}\), new MyCustom\(_{\text{step3}}\)());		
+\}
+\#+END\(_{\text{SRC}}\)
+\end{block}
+\end{block}
+
+\begin{block}{将前端的数据传入后端}
+\begin{itemize}
+\item 调用方法DoSerViceUtil.doService()
+\item 最后一个参数reqUrl 应该为sysconfig.xml文件中name为CONTEXT\(_{\text{URL元素的中的元素的name}}\)
+\item 报文需要在iprocess.xml文件中配置
+\end{itemize}
+\end{block}
+\end{block}
+
+
+\begin{block}{后端}
+\begin{block}{接收前端传来的参数}
+\begin{block}{写相应的Controller文件}
+\begin{itemize}
+\item @autowired:自动加载
+
+\item @RequestMapping(value = ""):映射相应的报文,value对应的为前端DoServiceUtil.doService()第一个参数
+\item @ResponseBody
+\end{itemize}
+\end{block}
+\end{block}
+
+\begin{block}{调用数据库数据}
+\begin{block}{1.完成xxxDao.java和xxxDao.xml文件,以及xxxInf.java文件}
+\end{block}
+\begin{block}{2.完成xxxService.java和xxxServiceImpl.java文件}
+\end{block}
+\begin{block}{3.在mybatis-config-hdcctptran.xml中配置xxxInf.java文件的别名}
+\end{block}
+\begin{block}{4.xxxController.java文件中自动加载xxxService,并调用相关方法。}
+\end{block}
+\begin{block}{注意:}
+\begin{itemize}
+\item xxxService.java文件中要自动加载xxxDao类(即添加注解@autowired)
+\item xxxDao.xml文件中parameterType的值为xxxDao.java中对应方法的的参数类型,resultType的值为对应方法返回值list<>泛型中的类型,一般为 xxxInf。
+\end{itemize}
+\end{block}
+\end{block}
+\end{block}
+\end{frame}
+\end{document}

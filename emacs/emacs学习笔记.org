@@ -10,4 +10,6 @@
 *** 2) 显示当前行
 #+BEGIN_SRC emacs-lisp
 (global-hl-line-mode t)
-#+END_
+#+END_SRC
+** day3
+*** 
