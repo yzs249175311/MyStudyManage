@@ -12,4 +12,6 @@
 (global-hl-line-mode t)
 #+END_SRC
 ** day3
-*** 
+*** popwin
+*** load-file,load-path,load
+*** feature,auto-load,provide
